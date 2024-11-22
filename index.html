@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MC Text Tool</title>
+  <style>
+    /* Dark Mode by default */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #121212; /* Dark background */
+      color: #ffffff; /* Light text */
+    }
+    h1 {
+      color: #ffffff;
+    }
+    .options {
+      margin-bottom: 20px;
+    }
+    label {
+      margin-right: 10px;
+      color: #e0e0e0;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      font-size: 16px;
+      padding: 10px;
+      background-color: #333; /* Dark background for textarea */
+      color: #fff; /* Light text for textarea */
+      border: 1px solid #444;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #formattedText {
+      margin-top: 20px;
+      font-size: 16px;
+      white-space: pre-wrap;
+      background-color: #333; /* Dark background */
+      padding: 15px;
+      border: 1px solid #444;
+      border-radius: 5px;
+      color: #e0e0e0; /* Light text */
+    }
+
+    /* Light Mode styles */
+    body.light-mode {
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    body.light-mode h1 {
+      color: #333;
+    }
+    body.light-mode textarea {
+      background-color: #fff;
+      color: #333;
+      border: 1px solid #ccc;
+    }
+    body.light-mode #formattedText {
+      background-color: #fff;
+      color: #333;
+      border: 1px solid #ccc;
+    }
+
+    /* Button to toggle modes */
+    .mode-toggle {
+      padding: 10px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .mode-toggle:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>MC Text Tool</h1>
+  
+  <div class="options">
+    <label><input type="checkbox" id="bold"> Bold</label>
+    <label><input type="checkbox" id="italic"> Italic</label>
+    <label><input type="checkbox" id="underline"> Underline</label>
+    <label><input type="checkbox" id="strikethrough"> Strikethrough</label>
+    <label><input type="checkbox" id="obfuscated"> Obfuscated</label>
+  </div>
+
+  <div class="options">
+    <label>Text Color:</label>
+    <select id="color">
+      <option value="">None</option>
+      <option value="§0">Black</option>
+      <option value="§1">Dark Blue</option>
+      <option value="§2">Aqua Green</option>
+      <option value="§3">Dark Aqua</option>
+      <option value="§4">Dark Red</option>
+      <option value="§5">Dark Purple</option>
+      <option value="§6">Gold</option>
+      <option value="§7">Gray</option>
+      <option value="§8">Dark Gray</option>
+      <option value="§9">Blue</option>
+      <option value="§a">Green</option>
+      <option value="§b">Aqua</option>
+      <option value="§c">Red</option>
+      <option value="§d">Light Purple</option>
+      <option value="§e">Yellow</option>
+      <option value="§f">White</option>
+    </select>
+  </div>
+  
+  <label for="inputText">Enter your text:</label>
+  <textarea id="inputText" placeholder="Type text here..."></textarea><br>
+  
+  <h3>Formatted Text (Minecraft Code):</h3>
+  <div id="formattedText"></div>
+
+  <!-- Button to toggle between dark and light mode -->
+  <button class="mode-toggle" id="modeToggle">Switch to Light Mode</button>
+
+  <script>
+    // Function to generate the Minecraft formatted string
+    function generateFormattedText() {
+      const text = document.getElementById("inputText").value;
+      let formattedText = text;
+
+      // Get selected formatting options
+      const bold = document.getElementById("bold").checked;
+      const italic = document.getElementById("italic").checked;
+      const underline = document.getElementById("underline").checked;
+      const strikethrough = document.getElementById("strikethrough").checked;
+      const obfuscated = document.getElementById("obfuscated").checked;
+      const color = document.getElementById("color").value;
+
+      // Start with the chosen color
+      let minecraftCode = color;
+
+      // Apply formatting based on checkboxes
+      if (bold) minecraftCode += '§l';
+      if (italic) minecraftCode += '§o';
+      if (underline) minecraftCode += '§n';
+      if (strikethrough) minecraftCode += '§m';
+      if (obfuscated) minecraftCode += '§k';
+
+      // Combine the Minecraft format with the text
+      formattedText = minecraftCode + text;
+
+      // Display the Minecraft formatted code in real-time
+      document.getElementById("formattedText").textContent = formattedText;
+    }
+
+    // Add event listeners for real-time updates
+    document.getElementById("bold").addEventListener("change", generateFormattedText);
+    document.getElementById("italic").addEventListener("change", generateFormattedText);
+    document.getElementById("underline").addEventListener("change", generateFormattedText);
+    document.getElementById("strikethrough").addEventListener("change", generateFormattedText);
+    document.getElementById("obfuscated").addEventListener("change", generateFormattedText);
+    document.getElementById("color").addEventListener("change", generateFormattedText);
+    document.getElementById("inputText").addEventListener("input", generateFormattedText);
+
+    // Function to toggle dark/light mode
+    document.getElementById("modeToggle").addEventListener("click", function() {
+      document.body.classList.toggle("light-mode");
+      const modeButton = document.getElementById("modeToggle");
+
+      // Change button text based on current mode
+      if (document.body.classList.contains("light-mode")) {
+        modeButton.textContent = "Switch to Dark Mode";
+      } else {
+        modeButton.textContent = "Switch to Light Mode";
+      }
+    });
+  </script>
+
+</body>
+</html>
