@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MC Text Tool</title>
   <style>
-    /* Dark Mode by default */
+    /* Dark Mode (Default) */
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
@@ -54,37 +54,25 @@
       color: #e0e0e0; /* Light text */
     }
 
-    /* Light Mode styles */
-    body.light-mode {
-      background-color: #f4f4f4;
-      color: #333;
+    /* Link Button styles */
+    .link-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #28a745;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+      border-radius: 5px;
+      text-align: center;
     }
-    body.light-mode h1 {
-      color: #333;
-    }
-    body.light-mode textarea {
-      background-color: #fff;
-      color: #333;
-      border: 1px solid #ccc;
-    }
-    body.light-mode #formattedText {
-      background-color: #fff;
-      color: #333;
-      border: 1px solid #ccc;
+    .link-button:hover {
+      background-color: #218838;
     }
 
-    /* Button to toggle modes */
-    .mode-toggle {
-      padding: 10px;
-      font-size: 16px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-    .mode-toggle:hover {
-      background-color: #0056b3;
+    /* Add margin after the link button */
+    .link-button + .options {
+      margin-top: 20px; /* Adds space after the link button */
     }
   </style>
 </head>
@@ -92,6 +80,9 @@
 
   <h1>MC Text Tool</h1>
   
+  <!-- link to ascii site -->
+  <a href="https://read.pubwriter.com/fancy" class="link-button" target="_blank">Fancy ASCII Symbols</a>
+
   <div class="options">
     <label><input type="checkbox" id="bold"> Bold</label>
     <label><input type="checkbox" id="italic"> Italic</label>
@@ -128,9 +119,6 @@
   
   <h3>Formatted Text (Minecraft Code):</h3>
   <div id="formattedText"></div>
-
-  <!-- Button to toggle between dark and light mode -->
-  <button class="mode-toggle" id="modeToggle">Switch to Light Mode</button>
 
   <script>
     // Function to generate the Minecraft formatted string
@@ -171,19 +159,6 @@
     document.getElementById("obfuscated").addEventListener("change", generateFormattedText);
     document.getElementById("color").addEventListener("change", generateFormattedText);
     document.getElementById("inputText").addEventListener("input", generateFormattedText);
-
-    // Function to toggle dark/light mode
-    document.getElementById("modeToggle").addEventListener("click", function() {
-      document.body.classList.toggle("light-mode");
-      const modeButton = document.getElementById("modeToggle");
-
-      // Change button text based on current mode
-      if (document.body.classList.contains("light-mode")) {
-        modeButton.textContent = "Switch to Dark Mode";
-      } else {
-        modeButton.textContent = "Switch to Light Mode";
-      }
-    });
   </script>
 
 </body>
